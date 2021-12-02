@@ -1,0 +1,17 @@
+class Solution{
+public:
+
+	// Function to find maximum product subarray
+	long long maxProduct(vector<int> arr, int n) {
+	    // code here
+	    int64_t maxOverall = arr[0];   //storing the overall max
+    int64_t max_ending_here = arr[0], min_ending_here = arr[0];
+    
+    for(int i = 1; i < arr.size(); ++i){
+        int64_t temp = max_ending_here;
+        max_ending_here = max({(int64_t)arr[i], arr[i]*max_ending_here, arr[i]*min_ending_here});
+        min_ending_here = min({(int64_t)arr[i], arr[i] * temp, arr[i]* min_ending_here});
+        maxOverall = max(maxOverall, max_ending_here);
+    }
+    return maxOverall;
+	}
